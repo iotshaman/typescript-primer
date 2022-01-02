@@ -8,7 +8,7 @@ const var2 = 0;
 console.log(var1 + var2) // Output: "test0";
 ```
 
-Since var1 and var2 dont have declared types, you can add these two together, which would result in var2 being converted to a string, before being concatenated to var1. While you may have meant to do this, it is more likely that this was a oversight, and javascript does not do anything to prevent it, or even warn you of the potential mistake. In Typescript, this would result in an error during compilation, and even better, your IDE (integrated developer environment, for example: Visual Studio, Eclipse, Atom, etc.) should catch this and display an error, as you write it.
+Since var1 and var2 don't have declared types, you can add these two together, which would result in var2 being converted to a string, before being concatenated to var1. While you may have meant to do this, it is more likely that this was a oversight, and javascript does not do anything to prevent it, or even warn you of the potential mistake. In Typescript, this would result in an error during compilation, and even better, your IDE (integrated developer environment, for example: Visual Studio, Eclipse, Atom, etc.) should catch this and display an error as you write it.
 
 Now, obviously no one would write the above code, but as software projects grow, lots of exported functions will accept inputs, and in a pure javascript environment, it is easy to pass a value of the wrong data type to a function, causing a runtime error.
 
@@ -55,7 +55,7 @@ In Typescript, you can apply a type to any variable when declaring the variable.
 
 ## Compilation
 
-Typescript is a compiled language, meaning the raw source code cannot be executed; instead, it needs to be "compiled" into something that can be executed. When typescript is compiled, it is converted into javascript (or more modern things like ecmascript, which is just javascript by another name wite additional features). To compile typescript into javascript, you simply need to run the following command in a folder with a "tsconfig.json" file (see below, [Configuring a Typescript Project](#configuring-a-typescript-project)):
+Typescript is a compiled language, meaning the raw source code cannot be executed; instead, it needs to be "compiled" into something that can be executed. When typescript is compiled, it is converted into javascript (or more modern things like ECMAscript, which is just javascript by another name with additional features). To compile typescript into javascript, you simply need to run the following command in a folder with a "tsconfig.json" file (see below, [Configuring a Typescript Project](#configuring-a-typescript-project)):
 
 ```sh
 tsc
@@ -87,11 +87,11 @@ This will prompt you to answer a few questions, simply press enter for each prom
 tsc --init
 ```
 
-This will create a new file "tsconfig.json", and set some default values. Now lets take a close look at some of these values, and how you can use them to control how your project is compiled.
+This will create a new file "tsconfig.json", and set some default values. Now lets take a closer look at some of these values, and how you can use them to control how your project is compiled.
 
 ### Configuration Reference
 
-Since projects can vary in scope, size, intent, etc., you may require a different typescript configuration for different projects. The below properties can be modified to change things like: include libraries, include / exlude files, change the target environment, where to ouput the compiled javascript files, and more.
+Since projects can vary in scope, size, intent, etc., you may require a different typescript configuration for different projects. The below properties can be modified to do things like: include libraries, include / exlude files, change the target environment, configure where to ouput the compiled javascript files, and more.
 
 *Note:* This configuration reference is meant to be used as a quick-start guide to understanding the most important compiler options, and is therefore not a complete reference. For a full reference to all tsconfig.json values, please view the [official documentation](https://www.typescriptlang.org/tsconfig).
 
@@ -130,13 +130,13 @@ For a full list of available "target" options, please [click here](https://www.t
 
 **compilerOptions.lib**
 
-This property is used to configure what javascript features are available at compilation time. If your development platform has a new-ish version of NodeJS, then you can use one of the more modern versions of javascript; if you development platform is using an older version of NodeJS, you may need to use an older version of javascript to prevent compiler errors.
+This property is used to configure what javascript features are available at compilation time. If your development platform has a new-ish version of NodeJS, then you can use one of the more modern versions of javascript; if your development platform is using an older version of NodeJS, you may need to use an older version of javascript to prevent compiler errors.
 
 For a full list of available "lib" options, please [click here](https://www.typescriptlang.org/tsconfig#lib).
 
 **compilerOptions.module**
 
-This property is used to configure what program is used for "module resoulution". Module resolution is how typescript knows where to look when you reference 3rd-party libraries. When using NodeJS, you will almost for sure want to use "commonjs", but if you are compiling typescript in an environment other than NodeJS, you may need to change this value (other common options are "system" and "umd").
+This property is used to configure what program is used for "module resoulution". Module resolution is how the typescript compiler knows where to look when you reference installed dependencies. When using NodeJS, you will almost for sure want to use "commonjs", but if you are compiling typescript in an environment other than NodeJS, you may need to change this value (other common options are "system" and "umd", but you do not need these if you are using NodeJS + typescript).
 
 For a full list of available "module" options, please [click here](https://www.typescriptlang.org/tsconfig#module).
 
@@ -150,7 +150,7 @@ For a full list of available "strict" options, please [click here](https://www.t
 
 Where to write compiled javascript files. By convention, we typically use "dist", but this can be anything you want.
 
-For more information about the "outDir" option, please [click here](https://www.typescriptlang.org/tsconfig#strict).
+For more information about the "outDir" option, please [click here](https://www.typescriptlang.org/tsconfig#outDir).
 
 **compilerOptions.declaration**
 
@@ -168,7 +168,7 @@ For more information about the "sourceMap" option, please [click here](https://w
 
 When set to true, developers can leverage a feature of javascript called "decorators". Decorators are little bits of code you can add *on top of* other code, to modify behavior.
 
-For more information about the "sourceMap" option, please [click here](https://www.typescriptlang.org/tsconfig#experimentalDecorators).
+For more information about the "experimentalDecorators" option, please [click here](https://www.typescriptlang.org/tsconfig#experimentalDecorators).
 
 **compilerOptions.typeRoots**
 
@@ -185,6 +185,8 @@ Then, in the tsconfig.json "compilerOptions.typeRoots" array, add the string "no
 //server.ts
 import { Request, Response, Application, Router } from "express";
 ```
+
+For more information about the "typeRoots" option, please [click here](https://www.typescriptlang.org/tsconfig#typeRoots).
 
 **include**
 
