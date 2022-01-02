@@ -170,7 +170,7 @@ When set to true, developers can leverage a feature of javascript called "decora
 
 For more information about the "sourceMap" option, please [click here](https://www.typescriptlang.org/tsconfig#experimentalDecorators).
 
-## compilerOptions.typeRoots**
+**compilerOptions.typeRoots**
 
 Takes an array of strings that instruct the compiler where to find type definitions for installed dependencies. Modernly, many npm packages come with their own type definitions, but when typescript first came around none of the existing npm packages had available type definitions. So to bridge this gap, most well-managed npm packages created type definitions for their existing packages, and published them to an npm repository called "Definitely Typed". The "typeRoots" compiler option allows you to specify the names of installed node packages that you want to be available to your development environment. You first must install the npm package, then install the type definition package. For example, to install the common http-server package "Express JS", and its type definition, enter the following commands:
 
