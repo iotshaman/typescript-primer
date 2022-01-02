@@ -21,7 +21,9 @@
 		"moment": "^2.29.1",
 		"mysql": "^2.18.1",
 		"mysql-shaman": "^1.0.2",
-		"reflect-metadata": "~0.1.13"
+		"reflect-metadata": "~0.1.13",
+		"sample-database": "file:../database",
+		"sample-library": "file:../library"
 	},
 	"devDependencies": {
 		"@types/chai": "^4.3.0",
