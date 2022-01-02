@@ -1,0 +1,22 @@
+{
+  "projects": [
+    {
+      "name": "sample-database",
+      "environment": "node",
+      "type": "database",
+      "path": "database"
+    },
+    {
+      "name": "sample-library",
+      "environment": "node",
+      "type": "library",
+      "path": "library"
+    },
+    {
+      "name": "sample-server",
+      "environment": "node",
+      "type": "server",
+      "path": "server"
+    }
+  ]
+}
