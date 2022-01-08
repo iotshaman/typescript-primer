@@ -202,7 +202,7 @@ Specifies a list of files to be excluded from compilation. The 'exclude' propert
 
 ## Quick-Start Guide
 
-Fortunately, you do not need to know all of the above configuration options to begin developing typescript application. Here at IoT Shaman, we have built a tool called [Shaman CLI](https://github.com/iotshaman/shaman-cli) which abstracts most of these complicated options, and can even generate code scaffolding, install and build typescript projects. In fact, this typescript primer repo was built entirely by using the Shaman CLI (no custom code written).
+Fortunately, you do not need to know all of the above configuration options to begin developing typescript application. Here at IoT Shaman, we have built a tool called [Shaman CLI](https://github.com/iotshaman/shaman-cli) which abstracts most of these complicated options, and can even generate code scaffolding, install and build typescript projects. In fact, this typescript primer repo was built entirely by using the Shaman CLI (no custom code).
 
 To begin developing a typescript application, you need only install Shaman CLI, create and populate a *solution file* ([see below](#solution-file)) in the folder where you want your code to reside, then run the following command:
 
@@ -213,6 +213,17 @@ shaman scaffold-solution
 *Note: To run the above command, make sure your command line interface is in the directory of your solution file.*
 
 Once the above command has completed, whatever projects you defined in your solution file will be automatically scaffolded (boiler-plate code will be generated and configured), and all dependencies will be installed. The only thing that is left to do is start writing your application / business logic.
+
+As previously mentioned, this repository contains a typescript solution that was scaffolded using the Shaman CLI. You can simply download this repository using git (or download as zip file), install the Shaman CLI (Node JS required) and run the following commands to install, build and start the server (respectively):
+
+```sh
+shaman install node
+shaman build node
+cd sample-server
+npm start
+```
+
+*Note: To run the above command, make sure your command line interface is in the directory of your solution file.*
 
 ### Solution File
 
@@ -253,3 +264,7 @@ Here is a sample solution file that defines 3 projects: 1 server, 1 library, and
 ```
 
 *Note: This file is also available as part of this repository (shaman.json).*
+
+## Learn More
+
+For more information on how to use the Shaman CLI, please visit the [git repository](https://github.com/iotshaman/shaman-cli), it contains everything you need to fully leverage the power of Shaman CLI.
