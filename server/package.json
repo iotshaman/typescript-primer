@@ -22,8 +22,8 @@
 		"mysql": "^2.18.1",
 		"mysql-shaman": "^1.0.2",
 		"reflect-metadata": "~0.1.13",
-		"sample-database": "file:../database",
-		"sample-library": "file:../library"
+		"sample-library": "file:..\\library",
+		"sample-database": "file:..\\database"
 	},
 	"devDependencies": {
 		"@types/chai": "^4.3.0",
