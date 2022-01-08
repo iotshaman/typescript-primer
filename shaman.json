@@ -1,22 +1,29 @@
 {
   "projects": [
     {
-      "name": "sample-database",
+      "name": "sample-server",
       "environment": "node",
-      "type": "database",
-      "path": "database"
+      "type": "server",
+      "path": "server",
+      "include": [
+        "sample-library",
+        "sample-database"
+      ]
     },
     {
       "name": "sample-library",
       "environment": "node",
       "type": "library",
-      "path": "library"
+      "path": "library",
+      "include": [
+        "sample-database"
+      ]
     },
     {
-      "name": "sample-server",
+      "name": "sample-database",
       "environment": "node",
-      "type": "server",
-      "path": "server"
+      "type": "database",
+      "path": "database"
     }
   ]
 }

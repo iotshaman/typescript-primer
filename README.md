@@ -8,7 +8,7 @@ const var2 = 0;
 console.log(var1 + var2) // Output: "test0";
 ```
 
-Since var1 and var2 don't have declared types, you can add these two together, which would result in var2 being converted to a string, before being concatenated to var1. While you may have meant to do this, it is more likely that this was a oversight, and javascript does not do anything to prevent it, or even warn you of the potential mistake. In Typescript, this would result in an error during compilation, and even better, your IDE (integrated developer environment, for example: Visual Studio, Eclipse, Atom, etc.) should catch this and display an error as you write it.
+Since var1 and var2 don't have declared types, you can add these two together, which would result in var2 being converted to a string, before being concatenated to var1. While you may have meant to do this, it is more likely that this was an oversight, and javascript does not do anything to prevent it, or even warn you of the potential mistake. In Typescript, this would result in an error during compilation, and even better, your IDE (integrated developer environment, for example: Visual Studio, Eclipse, Atom, etc.) should catch this and display an error as you write it.
 
 Now, obviously no one would write the above code, but as software projects grow, lots of exported functions will accept inputs, and in a pure javascript environment, it is easy to pass a value of the wrong data type to a function, causing a runtime error.
 
@@ -199,3 +199,57 @@ Specifies a list of glob patterns that match files to be included in compilation
 Specifies a list of files to be excluded from compilation. The 'exclude' property only affects the files included via the 'include' property and not the 'files' property. Glob patterns require TypeScript version 2.0 or later.
 
 *Source: Visual Studio Code*
+
+## Quick-Start Guide
+
+Fortunately, you do not need to know all of the above configuration options to begin developing typescript application. Here at IoT Shaman, we have built a tool called [Shaman CLI](https://github.com/iotshaman/shaman-cli) which abstracts most of these complicated options, and can even generate code scaffolding, install and build typescript projects. In fact, this typescript primer repo was built entirely by using the Shaman CLI (no custom code written).
+
+To begin developing a typescript application, you need only install Shaman CLI, create and populate a *solution file* ([see below](#solution-file)) in the folder where you want your code to reside, then run the following command:
+
+```sh
+shaman scaffold-solution
+```
+
+*Note: To run the above command, make sure your command line interface is in the directory of your solution file.*
+
+Once the above command has completed, whatever projects you defined in your solution file will be automatically scaffolded (boiler-plate code will be generated and configured), and all dependencies will be installed. The only thing that is left to do is start writing your application / business logic.
+
+### Solution File
+
+Solution files are named "shaman.json" by convention, and their purpose is to define the different projects that exist within the solution. By grouping projects together as a solution you have more flexibility in breaking down your code into independent, logical blocks, and it also encourages good *separation of concerns*. The solution file also lets you declare project-level dependencies, which teaches Shaman CLI how to build projects in the right order, while preserving your dependency heirarchy. Most importantly, using a solution file allows you to Shaman CLI to automatically generate code, install all project dependencies at once, build all projects at once, and much more.
+
+Here is a sample solution file that defines 3 projects: 1 server, 1 library, and 1 database library. Copy this into your repo folder and run the "scaffold-solution" command to get started today!
+
+```json
+{
+  "projects": [
+    {
+      "name": "sample-server",
+      "environment": "node",
+      "type": "server",
+      "path": "server",
+      "include": [
+        "sample-library",
+        "sample-database"
+      ]
+    },
+    {
+      "name": "sample-library",
+      "environment": "node",
+      "type": "library",
+      "path": "library",
+      "include": [
+        "sample-database"
+      ]
+    },
+    {
+      "name": "sample-database",
+      "environment": "node",
+      "type": "database",
+      "path": "database"
+    }
+  ]
+}
+```
+
+*Note: This file is also available as part of this repository (shaman.json).*
