@@ -87,9 +87,33 @@ This will prompt you to answer a few questions, simply press enter for each prom
 tsc --init
 ```
 
-This will create a new file "tsconfig.json", and set some default values. Now lets take a closer look at some of these values, and how you can use them to control how your project is compiled.
+This will create a new file "tsconfig.json", and set some default values. For more information about the different typescript configuration options, take a look at the [configuration reference section](#configuration-reference). For now, just note that there is an option "compilerOptions.outDir" that specifies where your compiled javascript files will be copied once the compilation is complete.
 
-### Configuration Reference
+## Compile a Typescript Project
+
+Once you have written some typescript source files and are ready to compile your project, simply open a command line interface (CMD, bash, etc.) in the folder where your tsconfig.json file is located and run the following command:
+
+```sh
+tsc
+```
+
+You can also setup an npm script in your package.json file and have it run this command for you. For example:
+
+```json
+{
+  ...
+  "scripts": {
+    "build": "tsc"
+  }
+  ...
+}
+```
+
+Then you can run `npm run build` to compile your typescript project. While this is technically a longer command, when working with Node JS projects you may end up using several tools, each with their own commands, and you can make your life easier by adding them as scripts to our package.json, so you have one entry point for all of your tooling.
+
+Once you run the `tsc` command (or `npm run build`) you should see your compiled javascript files in the location specified in your tsconfig.json "compilerOptions.outDir" folder.
+
+## Configuration Reference
 
 Since projects can vary in scope, size, intent, etc., you may require a different typescript configuration for different projects. The below properties can be modified to do things like: include libraries, include / exlude files, change the target environment, configure where to ouput the compiled javascript files, and more.
 
@@ -122,55 +146,55 @@ Below is a sample tsconfig.json file, we will use this to explore the different 
 }
 ```
 
-**compilerOptions.target**
+### compilerOptions.target
 
 Did you know that there are several different versions of javascript, each with varying support from different browsers / interpreters? The "compilerOptions.target" property can be modified to generate compiled javascript for different javascript versions. The trick to using this property it to understand where your code will be deployed and executed. If you are going for mass appeal, you will want to use an older version so your compiled code is compatible with the majority of browsers / interpreters. If you know that your code will be running on something that supports newer versions of javascript then you may want to use a more recent version, which would come with some performance improvements. 
 
 For a full list of available "target" options, please [click here](https://www.typescriptlang.org/tsconfig/#target).
 
-**compilerOptions.lib**
+### compilerOptions.lib
 
 This property is used to configure what javascript features are available at compilation time. If your development platform has a new-ish version of NodeJS, then you can use one of the more modern versions of javascript; if your development platform is using an older version of NodeJS, you may need to use an older version of javascript to prevent compiler errors.
 
 For a full list of available "lib" options, please [click here](https://www.typescriptlang.org/tsconfig#lib).
 
-**compilerOptions.module**
+### compilerOptions.module
 
 This property is used to configure what program is used for "module resoulution". Module resolution is how the typescript compiler knows where to look when you reference installed dependencies. When using NodeJS, you will almost for sure want to use "commonjs", but if you are compiling typescript in an environment other than NodeJS, you may need to change this value (other common options are "system" and "umd", but you do not need these if you are using NodeJS + typescript).
 
 For a full list of available "module" options, please [click here](https://www.typescriptlang.org/tsconfig#module).
 
-**compilerOptions.strict**
+### compilerOptions.strict
 
 The strict option forces developers to follow best practices, like declaring types for all variables. This can make development slightly more difficult, since there are more rules to follow, but it helps the compiler generate better code, and can even reduce the size of compiled code (sometimes drastically).
 
 For a full list of available "strict" options, please [click here](https://www.typescriptlang.org/tsconfig#strict).
 
-**compilerOptions.outDir**
+### compilerOptions.outDir
 
 Where to write compiled javascript files. By convention, we typically use "dist", but this can be anything you want.
 
 For more information about the "outDir" option, please [click here](https://www.typescriptlang.org/tsconfig#outDir).
 
-**compilerOptions.declaration**
+### compilerOptions.declaration
 
 When set to true, this instructs the compiler to generate "declaration" files. These are useful if you are going to publish your code for other people to use in the projects. When other projects use your compiled javascript, these declaration files tell IDE's what types are available.
 
 For more information about the "declaration" option, please [click here](https://www.typescriptlang.org/tsconfig#declaration).
 
-**compilerOptions.sourceMap**
+### compilerOptions.sourceMap
 
 When set to true, this instructs the compiler to generate "source map" files. These are useful when debugging your compiled javascript.
 
 For more information about the "sourceMap" option, please [click here](https://www.typescriptlang.org/tsconfig#sourceMap).
 
-**compilerOptions.experimentalDecorators**
+### compilerOptions.experimentalDecorators
 
 When set to true, developers can leverage a feature of javascript called "decorators". Decorators are little bits of code you can add *on top of* other code, to modify behavior.
 
 For more information about the "experimentalDecorators" option, please [click here](https://www.typescriptlang.org/tsconfig#experimentalDecorators).
 
-**compilerOptions.typeRoots**
+### compilerOptions.typeRoots
 
 Takes an array of strings that instruct the compiler where to find type definitions for installed dependencies. Modernly, many npm packages come with their own type definitions, but when typescript first came around none of the existing npm packages had available type definitions. So to bridge this gap, most well-managed npm packages created type definitions for their existing packages, and published them to an npm repository called "Definitely Typed". The "typeRoots" compiler option allows you to specify the names of installed node packages that you want to be available to your development environment. You first must install the npm package, then install the type definition package. For example, to install the common http-server package "Express JS", and its type definition, enter the following commands:
 
@@ -188,13 +212,13 @@ import { Request, Response, Application, Router } from "express";
 
 For more information about the "typeRoots" option, please [click here](https://www.typescriptlang.org/tsconfig#typeRoots).
 
-**include**
+### include
 
 Specifies a list of glob patterns that match files to be included in compilation. If no 'files' or 'include' property is present in a tsconfig.json, the compiler defaults to including all files in the containing directory and subdirectories except those specified by 'exclude'. Requires TypeScript version 2.0 or later.
 
 *Source: Visual Studio Code*
 
-**exclude**
+### exclude
 
 Specifies a list of files to be excluded from compilation. The 'exclude' property only affects the files included via the 'include' property and not the 'files' property. Glob patterns require TypeScript version 2.0 or later.
 
