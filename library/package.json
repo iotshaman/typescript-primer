@@ -1,6 +1,6 @@
 {
 	"name": "sample-library",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Scaffolded using shaman-cli.",
 	"main": "dist/index.js",
 	"typings": "public_api.d.ts",

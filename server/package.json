@@ -1,6 +1,6 @@
 {
 	"name": "sample-server",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Scaffolded using shaman-cli.",
 	"private": true,
 	"scripts": {

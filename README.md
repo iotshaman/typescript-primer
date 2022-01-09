@@ -140,8 +140,7 @@ Below is a sample tsconfig.json file, we will use this to explore the different 
     "src/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "src/**/*spec.ts"
+    "node_modules"
   ]
 }
 ```

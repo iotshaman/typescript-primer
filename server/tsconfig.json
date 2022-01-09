@@ -19,8 +19,7 @@
     "src/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "src/**/*spec.ts"
+    "node_modules"
   ],
   "compileOnSave": false
 }
