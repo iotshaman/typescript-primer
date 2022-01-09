@@ -1,20 +1,24 @@
 /* istanbul ignore file */
 import { Application, Request, Response } from 'express';
-import { IoC, TYPES } from './composition/app.composition';
+import { injectable, interfaces } from 'inversify';
 
 import { RouteError } from './models/route-error';
 import { ILogger } from './logger';
+import { CONTROLLER_TYPES } from './composition/app.composition.types';
 import { HealthController } from './controllers/health/health.controller';
 
+@injectable()
 export class ApiRouter {
   
-  private logger: ILogger;
-  private controllers: any[] = [];
+  private controllers: any[];
 
-  constructor(private app: Application) {
-    this.logger = IoC.get<ILogger>(TYPES.Logger);
+  constructor(private app: Application, private logger: ILogger) {
+    
+  }
+
+  public configure = (container: interfaces.Container): void => {
     this.loadMiddleware();
-    this.loadRoutes();
+    this.loadControllers(container);
     this.loadErrorHandlers();
   }
 
@@ -22,8 +26,10 @@ export class ApiRouter {
     this.app.all('/api/*', this.logApiRequests);
   }
 
-  private loadRoutes = () => {
-    this.controllers.push(new HealthController(this.app));
+  private loadControllers = (container: interfaces.Container): void => {
+    this.controllers = [
+      container.get<HealthController>(CONTROLLER_TYPES.HealthController)
+    ]
   }
 
   private loadErrorHandlers = () => {

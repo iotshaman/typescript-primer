@@ -1,10 +1,12 @@
 import * as fs from 'fs';
+import { injectable } from 'inversify';
 
 export interface IJsonFileService {
   getJson<T>(path: string): Promise<T>;
   writeJson<T>(path: string, data: T): Promise<void>;
 }
 
+@injectable()
 export class JsonFileService implements IJsonFileService {
 
   getJson<T>(path: string): Promise<T> {

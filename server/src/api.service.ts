@@ -4,8 +4,8 @@ import * as bodyParser from "body-parser";
 import * as cors from 'cors';
 import * as compression from 'compression';
 
-import { injectable } from "inversify";
-import { IoC, TYPES } from "./composition/app.composition";
+import { inject, injectable } from "inversify";
+import { TYPES } from "./composition/app.composition.types";
 import { ApiRouter } from './api.router';
 import { AppConfig } from "./models/app.config";
 import { ILogger } from "./logger";
@@ -18,15 +18,17 @@ export interface IApiService {
 @injectable()
 export class ApiService implements IApiService {
   
+  @inject(TYPES.AppConfig)
   private config: AppConfig;
+  @inject(TYPES.Logger)
   private logger: ILogger;
+  @inject(TYPES.ExpressApplication)
   public app: express.Application;
+  @inject(TYPES.ApiRouter)
   private router: ApiRouter;
   public serverStarted: boolean = false;
   
   constructor() {
-    this.config = IoC.get<AppConfig>(TYPES.AppConfig);
-    this.logger = IoC.get<ILogger>(TYPES.Logger);
     this.configure();
   }
 
@@ -40,7 +42,6 @@ export class ApiService implements IApiService {
       methods: 'GET,POST,PUT,DELETE',
       allowedHeaders: allowedHeaders.join(','),
     }));
-    this.router = new ApiRouter(this.app);
   }
 
   public startApplication = (): Promise<void> => {

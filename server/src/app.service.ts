@@ -1,14 +1,15 @@
 /* istanbul ignore file */
 import { Container } from 'inversify';
 
-import { Configure, TYPES } from './composition/app.composition';
+import { Configure } from './composition/app.composition';
+import { TYPES } from './composition/app.composition.types';
 import { ConfigFactory } from './config.factory';
 import { IApiService } from './api.service';
 
 ConfigFactory.GenerateConfig()
   .then(config => Configure(config))
-  .then((IoC: Container) => {
-    let apiService = IoC.get<IApiService>(TYPES.ApiService);
+  .then((container: Container) => {
+    let apiService = container.get<IApiService>(TYPES.ApiService);
     return apiService.startApplication();
   })
   .catch(ex => {
