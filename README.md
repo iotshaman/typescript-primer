@@ -242,11 +242,10 @@ As previously mentioned, this repository contains a typescript solution that was
 ```sh
 shaman install node
 shaman build node
-cd sample-server
-npm start
+shaman run sample-server
 ```
 
-*Note: To run the above command, make sure your command line interface is in the directory of your solution file.*
+*Note: To run the above commands, make sure your command line interface is in the directory of your solution file.*
 
 ### Solution File
 
