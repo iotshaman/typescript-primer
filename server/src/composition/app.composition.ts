@@ -27,13 +27,7 @@ function configureServices(container: Container, config: AppConfig): Promise<Con
 }
 
 function configureRouter(container: Container): Promise<Container> {
-  container.bind<ApiRouter>(TYPES.ApiRouter).toDynamicValue((context) => {
-    let app = context.container.get<express.Application>(TYPES.ExpressApplication);
-    let logger = context.container.get<ILogger>(TYPES.Logger);
-    let router = new ApiRouter(app, logger);
-    router.configure(context.container)
-    return router;
-  });
+  container.bind<ApiRouter>(TYPES.ApiRouter).to(ApiRouter);
   container.bind<HealthController>(CONTROLLER_TYPES.HealthController).to(HealthController);
   return Promise.resolve(container);
 }

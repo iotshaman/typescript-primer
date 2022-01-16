@@ -10,6 +10,7 @@ ConfigFactory.GenerateConfig()
   .then(config => Configure(config))
   .then((container: Container) => {
     let apiService = container.get<IApiService>(TYPES.ApiService);
+    apiService.configure(container);
     return apiService.startApplication();
   })
   .catch(ex => {

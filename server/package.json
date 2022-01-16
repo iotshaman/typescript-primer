@@ -1,6 +1,6 @@
 {
 	"name": "sample-server",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Scaffolded using shaman-cli.",
 	"private": true,
 	"scripts": {
@@ -20,7 +20,7 @@
 		"inversify": "^6.0.1",
 		"moment": "^2.29.1",
 		"mysql": "^2.18.1",
-		"mysql-shaman": "^1.0.2",
+		"mysql-shaman": "^1.0.5",
 		"reflect-metadata": "~0.1.13",
 		"sample-library": "file:..\\library",
 		"sample-database": "file:..\\database"

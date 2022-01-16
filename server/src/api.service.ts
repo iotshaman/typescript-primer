@@ -4,7 +4,7 @@ import * as bodyParser from "body-parser";
 import * as cors from 'cors';
 import * as compression from 'compression';
 
-import { inject, injectable } from "inversify";
+import { Container, inject, injectable } from "inversify";
 import { TYPES } from "./composition/app.composition.types";
 import { ApiRouter } from './api.router';
 import { AppConfig } from "./models/app.config";
@@ -12,6 +12,7 @@ import { ILogger } from "./logger";
 
 export interface IApiService {
   app: express.Application;
+  configure: (container: Container) => void;
   startApplication: () => Promise<void>;
 }
 
@@ -27,13 +28,8 @@ export class ApiService implements IApiService {
   @inject(TYPES.ApiRouter)
   private router: ApiRouter;
   public serverStarted: boolean = false;
-  
-  constructor() {
-    this.configure();
-  }
 
-  private configure = (): void => {
-    this.app = express();
+  public configure = (container: Container): void => {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(compression());
@@ -42,6 +38,7 @@ export class ApiService implements IApiService {
       methods: 'GET,POST,PUT,DELETE',
       allowedHeaders: allowedHeaders.join(','),
     }));
+    this.router.configure(container);
   }
 
   public startApplication = (): Promise<void> => {
